@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Konu Pub & Grill — Roblox Roleplay Experience</title>
+<meta name="description" content="Konu Pub & Grill is a Roblox restaurant roleplay experience. Bartend, cook, wait tables, and run the house with friends.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15110c;
+    --panel:#1f170f;
+    --panel-2:#291f14;
+    --brass:#cb9a4c;
+    --brass-light:#e7c384;
+    --ember:#b5462e;
+    --ember-light:#d97a5f;
+    --parchment:#f4e9d7;
+    --parchment-dim:#b9a98c;
+    --line: rgba(244,233,215,0.14);
+    --line-strong: rgba(244,233,215,0.26);
+    --radius: 4px;
+    --maxw: 1160px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:"Work Sans", sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:"Fraunces", serif;
+    font-weight:600;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit; cursor:pointer; background:none; border:none; padding:0; appearance:none; -webkit-appearance:none; color:inherit; font-size:inherit;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  section{position:relative;}
+
+  /* subtle grain / vignette on the whole page */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    z-index:1000;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(203,154,76,0.07), transparent 55%);
+    mix-blend-mode:normal;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:100;
+    background:rgba(21,17,12,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    height:72px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:"Fraunces", serif;
+    font-weight:700;
+    font-size:1.25rem;
+    color:var(--parchment);
+    text-align:left;
+  }
+  .brand svg{width:30px; height:30px; flex-shrink:0;}
+  .brand span.grill{color:var(--brass-light);}
+
+  .nav-links{
+    display:flex; align-items:center; gap:32px;
+  }
+  .nav-links a, .nav-links button{
+    font-size:0.94rem;
+    color:var(--parchment-dim);
+    transition:color .15s ease;
+  }
+  .nav-links a:hover, .nav-links button:hover{color:var(--parchment);}
+
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:10px 20px;
+    border-radius:var(--radius);
+    font-size:0.92rem;
+    font-weight:600;
+    border:1px solid transparent;
+    white-space:nowrap;
+    transition:transform .12s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{
+    background:var(--brass);
+    color:#1c1409;
+  }
+  .btn-primary:hover{background:var(--brass-light);}
+  .btn-ghost{
+    border-color:var(--line-strong);
+    color:var(--parchment);
+  }
+  .btn-ghost:hover{border-color:var(--brass);}
+  .btn-text{color:var(--parchment-dim); font-size:0.92rem;}
+  .btn-text:hover{color:var(--parchment);}
+
+  .menu-toggle{
+    display:none;
+    background:none; border:none;
+    width:32px; height:32px;
+    padding:0;
+    flex-direction:column; justify-content:center; gap:5px;
+  }
+  .menu-toggle span{
+    display:block; height:2px; width:100%;
+    background:var(--parchment);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:96px 0 88px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(1100px 480px at 78% -12%, rgba(181,70,46,0.16), transparent 60%);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    color:var(--brass-light);
+    font-size:0.88rem;
+    font-weight:600;
+    margin-bottom:20px;
+  }
+  .hero-eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--ember-light);}
+  .hero h1{
+    font-size:clamp(2.4rem, 4.4vw, 3.6rem);
+    max-width:12ch;
+    color:var(--parchment);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--brass-light);
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:1.08rem;
+    color:var(--parchment-dim);
+    max-width:46ch;
+  }
+  .hero-actions{
+    margin-top:34px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .hero-meta{
+    margin-top:36px;
+    display:flex; gap:28px; flex-wrap:wrap;
+    color:var(--parchment-dim);
+    font-size:0.88rem;
+  }
+  .hero-meta strong{
+    display:block;
+    color:var(--parchment);
+    font-family:"Fraunces", serif;
+    font-size:1.3rem;
+    font-weight:600;
+  }
+
+  /* chalkboard mockup */
+  .board{
+    background:#20261f;
+    border:10px solid var(--panel-2);
+    outline:1px solid var(--line-strong);
+    border-radius:10px;
+    padding:34px 30px;
+    transform:rotate(1.4deg);
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.7);
+    position:relative;
+  }
+  .board::before{
+    content:"";
+    position:absolute; top:-6px; left:26px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--brass);
+    box-shadow:0 3px 5px rgba(0,0,0,0.4);
+  }
+  .board::after{
+    content:"";
+    position:absolute; top:-6px; right:26px;
+    width:16px; height:16px; border-radius:50%;
+    background:var(--brass);
+    box-shadow:0 3px 5px rgba(0,0,0,0.4);
+  }
+  .board-head{
+    font-family:"Fraunces", serif;
+    font-style:italic;
+    font-size:1.15rem;
+    color:#f4e9d7;
+    padding-bottom:14px;
+    margin-bottom:14px;
+    border-bottom:1px dashed rgba(244,233,215,0.3);
+  }
+  .board-list li{
+    display:flex; align-items:baseline; gap:10px;
+    padding:10px 0;
+    font-size:0.98rem;
+    color:#e7dfcd;
+  }
+  .board-list li + li{border-top:1px solid rgba(244,233,215,0.08);}
+  .board-list .mark{color:var(--ember-light); font-family:"Fraunces", serif; font-style:italic;}
+  .board-list .fill{flex:1; border-bottom:1px dotted rgba(244,233,215,0.25); transform:translateY(-4px);}
+  .board-list .tag{
+    font-size:0.76rem;
+    color:#20261f;
+    background:var(--brass-light);
+    padding:2px 8px;
+    border-radius:3px;
+    font-weight:700;
+  }
+
+  /* ---------- Marquee strip ---------- */
+  .strip{
+    border-bottom:1px solid var(--line);
+    background:var(--panel);
+    overflow:hidden;
+    padding:18px 0;
+  }
+  .strip-track{
+    display:flex;
+    gap:0;
+    width:max-content;
+    animation:scroll 38s linear infinite;
+  }
+  .strip-item{
+    display:flex; align-items:center; gap:10px;
+    padding:0 28px;
+    font-size:0.92rem;
+    color:var(--parchment-dim);
+    border-right:1px solid var(--line);
+    white-space:nowrap;
+  }
+  .strip-item .dot{width:5px; height:5px; border-radius:50%; background:var(--brass);}
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .strip-track{animation:none;}
+  }
+
+  /* ---------- Section shell ---------- */
+  .section{padding:100px 0;}
+  .section + .section{border-top:1px solid var(--line);}
+  .section-head{
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 3vw, 2.5rem);
+    color:var(--parchment);
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--parchment-dim);
+    font-size:1.02rem;
+  }
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+
+  /* ---------- Ticket rail (order system showcase) ---------- */
+  .rail-wrap{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:48px 40px;
+    overflow-x:auto;
+  }
+  .rail{
+    display:flex;
+    gap:26px;
+    min-width:max-content;
+    padding-bottom:6px;
+  }
+  .ticket{
+    width:220px;
+    background:#efe3c9;
+    color:#241a10;
+    padding:18px 16px 22px;
+    border-radius:2px;
+    box-shadow:0 18px 30px -18px rgba(0,0,0,0.55);
+    position:relative;
+  }
+  .ticket:nth-child(odd){transform:rotate(-2.2deg);}
+  .ticket:nth-child(even){transform:rotate(1.6deg);}
+  .ticket::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-9px; height:10px;
+    background:
+      linear-gradient(135deg, transparent 50%, #efe3c9 50%),
+      linear-gradient(45deg, #efe3c9 50%, transparent 50%);
+    background-size:12px 12px;
+    background-position:bottom left;
+    background-repeat:repeat-x;
+  }
+  .ticket-table{
+    font-family:"Fraunces", serif;
+    font-weight:700;
+    font-size:1.5rem;
+  }
+  .ticket-time{
+    font-size:0.75rem;
+    color:#7a6a4d;
+    margin-top:2px;
+  }
+  .ticket-items{margin-top:14px;}
+  .ticket-items li{
+    font-size:0.85rem;
+    padding:4px 0;
+    border-bottom:1px dotted rgba(36,26,16,0.2);
+  }
+  .ticket-chip{
+    display:inline-block;
+    margin-top:12px;
+    font-size:0.72rem;
+    font-weight:700;
+    padding:3px 8px;
+    border-radius:3px;
+  }
+  .chip-fire{background:rgba(181,70,46,0.16); color:var(--ember);}
+  .chip-ready{background:rgba(76,140,90,0.18); color:#3d7a4a;}
+  .chip-new{background:rgba(203,154,76,0.22); color:#8a6218;}
+
+  .feature-copy{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .feature-copy.reverse{grid-template-columns:1.1fr 0.9fr;}
+  .feature-copy.reverse .rail-wrap{order:2;}
+  .feature-list li{
+    display:flex; gap:14px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+  }
+  .feature-list li:last-child{border-bottom:1px solid var(--line);}
+  .feature-list .num{
+    font-family:"Fraunces", serif;
+    color:var(--brass-light);
+    font-style:italic;
+    font-size:1.1rem;
+    width:28px;
+    flex-shrink:0;
+  }
+  .feature-list h4{font-size:1.05rem; color:var(--parchment); margin-bottom:4px;}
+  .feature-list p{color:var(--parchment-dim); font-size:0.95rem;}
+
+  /* ---------- Positions grid ---------- */
+  .positions{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .position-card{
+    background:var(--panel);
+    padding:32px 26px;
+  }
+  .position-card svg{width:26px; height:26px; color:var(--brass-light); margin-bottom:20px;}
+  .position-card h3{font-size:1.1rem; color:var(--parchment); margin-bottom:10px;}
+  .position-card p{color:var(--parchment-dim); font-size:0.92rem;}
+  .position-status{
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:18px;
+    font-size:0.78rem;
+    color:var(--parchment-dim);
+  }
+  .position-status .pulse{width:6px; height:6px; border-radius:50%; background:#4c8c5a;}
+  .position-status.closed .pulse{background:#7a5b3d;}
+
+  /* ---------- Rank hierarchy ---------- */
+  .hierarchy-list{
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .hierarchy-row{
+    display:grid;
+    grid-template-columns:48px 200px 1fr 240px;
+    gap:24px;
+    align-items:center;
+    padding:22px 28px;
+    background:var(--panel);
+  }
+  .hierarchy-row:nth-child(even){background:var(--panel-2);}
+  .hierarchy-row + .hierarchy-row{border-top:1px solid var(--line);}
+  .hierarchy-tier{
+    font-family:"Fraunces", serif;
+    font-style:italic;
+    color:var(--parchment-dim);
+    font-size:0.95rem;
+  }
+  .hierarchy-name{
+    display:flex; align-items:center; gap:10px;
+    font-family:"Fraunces", serif;
+    font-weight:600;
+    color:var(--parchment);
+    font-size:1.05rem;
+  }
+  .hierarchy-name .swatch{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+  .hierarchy-desc{color:var(--parchment-dim); font-size:0.92rem;}
+  .hierarchy-req{color:var(--parchment-dim); font-size:0.82rem; text-align:right;}
+  @media (max-width: 720px){
+    .hierarchy-row{grid-template-columns:1fr; gap:6px; text-align:left;}
+    .hierarchy-req{text-align:left;}
+  }
+
+  /* ---------- Testimonials ---------- */
+  .quote-card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:38px;
+  }
+  .quote-card p.quote{
+    font-family:"Fraunces", serif;
+    font-size:1.25rem;
+    font-weight:500;
+    color:var(--parchment);
+    line-height:1.5;
+  }
+  .quote-person{
+    display:flex; align-items:center; gap:12px;
+    margin-top:26px;
+  }
+  .avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--brass);
+    color:#1c1409;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:0.85rem;
+    flex-shrink:0;
+  }
+  .quote-person .who{font-size:0.9rem; color:var(--parchment);}
+  .quote-person .role{font-size:0.82rem; color:var(--parchment-dim);}
+  .testimonials-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    padding:90px 0;
+    text-align:center;
+    background:
+      repeating-linear-gradient(115deg, rgba(244,233,215,0.03) 0 2px, transparent 2px 42px),
+      var(--panel-2);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .cta-band h2{
+    font-size:clamp(2rem, 3.6vw, 2.9rem);
+    color:var(--parchment);
+    max-width:14ch;
+    margin:0 auto;
+  }
+  .cta-band p{
+    margin-top:18px;
+    color:var(--parchment-dim);
+    font-size:1.02rem;
+  }
+  .cta-band .hero-actions{justify-content:center; margin-top:32px;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:72px 0 36px;}
+  .footer-top{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:56px;
+  }
+  .footer-brand .brand{margin-bottom:16px;}
+  .footer-brand p{color:var(--parchment-dim); font-size:0.92rem; max-width:34ch;}
+  .footer-col h5{
+    font-size:0.85rem;
+    color:var(--parchment);
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .footer-col ul li{margin-bottom:11px;}
+  .footer-col a, .footer-col button{color:var(--parchment-dim); font-size:0.88rem;}
+  .footer-col a:hover, .footer-col button:hover{color:var(--brass-light);}
+  .footer-bottom{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:14px;
+    padding-top:28px;
+    border-top:1px solid var(--line);
+    color:var(--parchment-dim);
+    font-size:0.82rem;
+  }
+  .footer-socials{display:flex; gap:16px;}
+  .footer-socials a, .footer-socials button{color:var(--parchment-dim);}
+  .footer-socials a:hover, .footer-socials button:hover{color:var(--brass-light);}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 920px){
+    .nav-links{display:none;}
+    .menu-toggle{display:flex;}
+    .hero-grid{grid-template-columns:1fr; gap:48px;}
+    .board{transform:none; max-width:440px;}
+    .feature-copy, .feature-copy.reverse{grid-template-columns:1fr;}
+    .feature-copy.reverse .rail-wrap{order:0;}
+    .positions{grid-template-columns:1fr 1fr;}
+    .testimonials-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr 1fr; row-gap:36px;}
+  }
+  @media (max-width: 560px){
+    .wrap{padding:0 20px;}
+    .section{padding:72px 0;}
+    .hero{padding:64px 0 56px;}
+    .positions{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Staff settings overlay ---------- */
+  .staff-overlay{
+    position:fixed; inset:0; z-index:500;
+    background:rgba(21,17,12,0.98);
+    overflow-y:auto;
+    display:none;
+  }
+  .staff-overlay.active{display:block;}
+  .staff-close{
+    position:fixed; top:22px; right:28px; z-index:510;
+    background:none; border:1px solid var(--line-strong);
+    color:var(--parchment); width:36px; height:36px; border-radius:50%;
+    font-size:1.1rem; line-height:1; cursor:pointer;
+  }
+  .staff-close:hover{border-color:var(--brass);}
+  .staff-inner{max-width:900px; margin:0 auto; padding:80px 24px 100px;}
+
+  .lock-card{
+    width:100%; max-width:360px; margin:60px auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:36px 32px; text-align:center;
+  }
+  .lock-card h1{font-size:1.4rem; margin-bottom:8px; font-family:"Fraunces", serif;}
+  .lock-card p{color:var(--parchment-dim); font-size:0.9rem; margin-bottom:24px;}
+  .lock-card form{display:flex; flex-direction:column; gap:14px;}
+  .lock-card input[type="password"]{
+    width:100%; background:var(--ink); border:1px solid var(--line-strong);
+    border-radius:4px; color:var(--parchment); padding:10px 12px; font-family:inherit; font-size:0.92rem;
+  }
+  .lock-card input:focus{outline:none; border-color:var(--brass);}
+  .error-msg{color:var(--ember); font-size:0.85rem; min-height:18px;}
+
+  .staff-editor{display:none;}
+  .staff-editor.active{display:block;}
+  .staff-notice{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:6px;
+    padding:16px 18px; font-size:0.88rem; color:var(--parchment-dim); margin-bottom:36px;
+  }
+  .staff-notice strong{color:var(--parchment);}
+  .staff-editor h2{font-size:1.6rem; margin-bottom:6px;}
+  .staff-editor .section-sub{color:var(--parchment-dim); font-size:0.9rem; margin-bottom:20px;}
+
+  .rank-row{
+    display:grid; grid-template-columns:44px 1fr 1fr 1fr 90px;
+    gap:12px; align-items:start; padding:16px 0; border-top:1px solid var(--line);
+  }
+  .rank-row:last-of-type{border-bottom:1px solid var(--line);}
+  .rank-color{display:flex; flex-direction:column; align-items:center; gap:6px; padding-top:4px;}
+  .rank-color input[type="color"]{width:32px; height:32px; padding:2px; cursor:pointer; background:none; border:1px solid var(--line-strong); border-radius:4px;}
+  .rank-tier{font-family:"Fraunces", serif; font-style:italic; color:var(--parchment-dim); font-size:0.85rem;}
+  .rank-field label{display:block; font-size:0.72rem; color:var(--parchment-dim); margin-bottom:4px;}
+  .rank-field input{
+    width:100%; background:var(--ink); border:1px solid var(--line-strong);
+    border-radius:4px; color:var(--parchment); padding:8px 10px; font-family:inherit; font-size:0.88rem;
+  }
+  .rank-field input:focus{outline:none; border-color:var(--brass);}
+  .row-actions{display:flex; flex-direction:column; gap:6px;}
+  .row-actions button{
+    background:none; border:1px solid var(--line-strong); color:var(--parchment-dim);
+    border-radius:4px; font-size:0.75rem; padding:4px 0; cursor:pointer;
+  }
+  .row-actions button:hover{border-color:var(--brass); color:var(--parchment);}
+
+  .staff-editor .section-title{font-size:1.3rem; margin:56px 0 8px; font-family:"Fraunces", serif;}
+  .output-box{background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:18px;}
+  .output-box textarea{
+    width:100%; height:240px; background:transparent; border:none; resize:vertical;
+    color:var(--brass-light); font-family:ui-monospace, "SF Mono", Menlo, monospace; font-size:0.78rem; line-height:1.5;
+  }
+  .output-box textarea:focus{outline:none;}
+  .copy-row{display:flex; gap:12px; margin-top:14px; align-items:center;}
+  .copy-msg{font-size:0.82rem; color:#4c8c5a;}
+
+  details.change-pw{margin-top:60px; border-top:1px solid var(--line); padding-top:24px;}
+  details.change-pw summary{cursor:pointer; color:var(--parchment-dim); font-size:0.88rem;}
+  .pw-panel{margin-top:18px; max-width:420px; display:flex; flex-direction:column; gap:12px;}
+  .pw-panel input[type="text"]{
+    background:var(--ink); border:1px solid var(--line-strong); border-radius:4px;
+    color:var(--parchment); padding:10px 12px; font-family:inherit; font-size:0.9rem;
+  }
+  .pw-out{
+    font-family:ui-monospace, monospace; font-size:0.8rem;
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:10px; word-break:break-all; color:var(--brass-light);
+  }
+
+  @media (max-width: 640px){
+    .rank-row{grid-template-columns:1fr; gap:8px;}
+    .rank-color{flex-direction:row; justify-content:flex-start;}
+    .row-actions{flex-direction:row;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <button type="button" class="brand js-scroll" data-target="top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/>
+        <path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/>
+        <path d="M8 4.5c-.6.7-.6 1.3 0 2s.6 1.3 0 2M12 4.5c-.6.7-.6 1.3 0 2s.6 1.3 0 2"/>
+      </svg>
+      Konu <span class="grill">Pub & Grill</span>
+    </button>
+    <nav class="nav-links">
+      <button type="button" class="js-scroll" data-target="floor">The Floor</button>
+      <button type="button" class="js-scroll" data-target="positions">Positions</button>
+      <button type="button" class="js-scroll" data-target="hierarchy">Rank Hierarchy</button>
+      <button type="button" class="js-scroll" data-target="reviews">Regulars</button>
+      <button type="button" class="js-scroll" data-target="apply">Apply</button>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="btn-text js-staff-login">Staff Login</button>
+      <button type="button" class="btn btn-ghost" data-placeholder="discord">Join Discord</button>
+      <button type="button" class="btn btn-primary" data-placeholder="roblox">Play on Roblox</button>
+    </div>
+    <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow"><span class="dot"></span>Now serving on Roblox</div>
+        <h1>Run the house at <em>Konu Pub & Grill</em></h1>
+        <p class="hero-sub">A restaurant roleplay experience where you cook, bartend, wait tables, and climb the ranks from busser to general manager — with a real crew backing you up.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" data-placeholder="roblox">Play on Roblox</button>
+          <button type="button" class="btn btn-ghost js-scroll" data-target="apply">Apply for staff</button>
+        </div>
+        <div class="hero-meta">
+          <div><strong>4</strong>departments to work</div>
+          <div><strong>5</strong>ranks to climb</div>
+          <div><strong>24/7</strong>the grill stays open</div>
+        </div>
+      </div>
+      <div class="board">
+        <div class="board-head">Tonight's board</div>
+        <ul class="board-list">
+          <li><span class="mark">—</span> Live order tickets, kitchen &amp; bar<span class="fill"></span><span class="tag">New</span></li>
+          <li><span class="mark">—</span> Shift schedule, posted weekly<span class="fill"></span></li>
+          <li><span class="mark">—</span> Staff applications, open below<span class="fill"></span></li>
+          <li><span class="mark">—</span> House rules &amp; training notes<span class="fill"></span></li>
+          <li><span class="mark">—</span> Discord-linked staff log<span class="fill"></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="strip-track">
+      <div class="strip-item"><span class="dot"></span>Full kitchen &amp; bar order system</div>
+      <div class="strip-item"><span class="dot"></span>Weekly shift scheduling</div>
+      <div class="strip-item"><span class="dot"></span>Staff applications &amp; training</div>
+      <div class="strip-item"><span class="dot"></span>Tips, tabs &amp; regulars</div>
+      <div class="strip-item"><span class="dot"></span>Live events &amp; specials nights</div>
+      <div class="strip-item"><span class="dot"></span>Discord-linked staff log</div>
+      <div class="strip-item"><span class="dot"></span>Rank progression, busser to GM</div>
+      <div class="strip-item"><span class="dot"></span>Full kitchen &amp; bar order system</div>
+      <div class="strip-item"><span class="dot"></span>Weekly shift scheduling</div>
+      <div class="strip-item"><span class="dot"></span>Staff applications &amp; training</div>
+      <div class="strip-item"><span class="dot"></span>Tips, tabs &amp; regulars</div>
+      <div class="strip-item"><span class="dot"></span>Live events &amp; specials nights</div>
+      <div class="strip-item"><span class="dot"></span>Discord-linked staff log</div>
+      <div class="strip-item"><span class="dot"></span>Rank progression, busser to GM</div>
+    </div>
+  </div>
+
+  <section class="section" id="floor">
+    <div class="wrap">
+      <div class="feature-copy">
+        <div>
+          <div class="section-head" style="margin-bottom:32px;">
+            <h2>Work a real shift on the floor</h2>
+            <p>Tickets fire to the kitchen and bar in real time. Get the order out before it goes cold, or the table's walking.</p>
+          </div>
+          <ul class="feature-list">
+            <li>
+              <span class="num">01</span>
+              <div><h4>Tickets fire live</h4><p>Orders taken on the floor land on the kitchen rail and bar rail instantly — no relay, no guesswork.</p></div>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <div><h4>Timers keep you honest</h4><p>Every ticket shows how long it's been sitting, so nothing gets forgotten during a rush.</p></div>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <div><h4>Built for a full house</h4><p>Handles a packed Friday night same as a slow Tuesday afternoon.</p></div>
+            </li>
+          </ul>
+        </div>
+        <div class="rail-wrap">
+          <div class="rail">
+            <div class="ticket">
+              <div class="ticket-table">Table 4</div>
+              <div class="ticket-time">Fired 2 min ago</div>
+              <ul class="ticket-items">
+                <li>Grilled club sandwich</li>
+                <li>Side of fries</li>
+                <li>House ale, pint</li>
+              </ul>
+              <span class="ticket-chip chip-fire">On the grill</span>
+            </div>
+            <div class="ticket">
+              <div class="ticket-table">Bar 2</div>
+              <div class="ticket-time">Fired just now</div>
+              <ul class="ticket-items">
+                <li>Two ambers, tap</li>
+                <li>Basket of wings</li>
+              </ul>
+              <span class="ticket-chip chip-new">New</span>
+            </div>
+            <div class="ticket">
+              <div class="ticket-table">Table 9</div>
+              <div class="ticket-time">Fired 6 min ago</div>
+              <ul class="ticket-items">
+                <li>Ribeye, medium</li>
+                <li>Mash &amp; gravy</li>
+                <li>House red</li>
+              </ul>
+              <span class="ticket-chip chip-ready">Ready to run</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="positions">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Every position it takes to run the house</h2>
+        <p>From the floor to the office, here's who keeps Konu Pub & Grill open every night.</p>
+      </div>
+      <div class="positions">
+        <div class="position-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M6 19V9l6-5 6 5v10M9 19v-6h6v6"/></svg>
+          <h3>Front of House</h3>
+          <p>Hosts, servers, and bartenders. First to greet a table, last to close the tab.</p>
+          <span class="position-status"><span class="pulse"></span>Applications open</span>
+        </div>
+        <div class="position-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3c-2 2-2 4 0 6M12 3c-2 2-2 4 0 6M16 3c-2 2-2 4 0 6M5 21h14M6 21c0-6 2-10 6-10s6 4 6 10"/></svg>
+          <h3>Kitchen</h3>
+          <p>Line cooks, grill, and prep. Every ticket that hits the rail goes through here first.</p>
+          <span class="position-status"><span class="pulse"></span>Applications open</span>
+        </div>
+        <div class="position-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="1.5"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1M9 11h6M9 15h6"/></svg>
+          <h3>Management</h3>
+          <p>Shift leads and the general manager. Scheduling, training, and keeping the night on track.</p>
+          <span class="position-status closed"><span class="pulse"></span>By promotion only</span>
+        </div>
+        <div class="position-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6l-7-3Z"/></svg>
+          <h3>Security</h3>
+          <p>Keeping the door and the floor calm, so everyone else can focus on the shift.</p>
+          <span class="position-status"><span class="pulse"></span>Applications open</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="hierarchy">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Rank hierarchy</h2>
+        <p>Every rank at Konu Pub & Grill, top to bottom. Managed from the staff settings page.</p>
+      </div>
+      <div class="hierarchy-list" id="hierarchyList"><!-- filled by script below --></div>
+    </div>
+  </section>
+
+  <section class="section" id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What the regulars are saying</h2>
+        <p>A few notes from staff and players who spend their evenings at Konu.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="quote-card">
+          <p class="quote">"Went from busser to shift lead in a month. The training actually teaches you the floor instead of throwing you in blind."</p>
+          <div class="quote-person">
+            <div class="avatar">RM</div>
+            <div><div class="who">rm_serves</div><div class="role">Shift Lead, Front of House</div></div>
+          </div>
+        </div>
+        <div class="quote-card">
+          <p class="quote">"The kitchen rail makes a packed Friday feel manageable. You always know what's up next on the grill."</p>
+          <div class="quote-person">
+            <div class="avatar">TK</div>
+            <div><div class="who">tokyo_kade</div><div class="role">Line Cook, Kitchen</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band" id="apply">
+    <div class="wrap">
+      <h2>Pull up a chair.</h2>
+      <p>Play tonight, or put in an application and join the crew.</p>
+      <div class="hero-actions">
+        <a href="javascript:void(0)" class="btn btn-primary" data-placeholder="roblox">Play on Roblox</a>
+        <a href="javascript:void(0)" class="btn btn-ghost" data-placeholder="apply-form">Apply for staff</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#top" class="brand">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/>
+            <path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/>
+          </svg>
+          Konu <span class="grill">Pub & Grill</span>
+        </a>
+        <p>A Roblox restaurant roleplay experience. Community-run, staffed by players, open every night.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Game</h5>
+        <ul>
+          <li><a href="javascript:void(0)" data-placeholder="roblox">Play on Roblox</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="rules">House rules</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="updates">Update log</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="events">Events calendar</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Staff</h5>
+        <ul>
+          <li><a href="#apply">Apply</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="handbook">Staff handbook</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="schedule">Shift schedule</a></li>
+          <li><a href="#staff" class="js-staff-login">Staff login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Community</h5>
+        <ul>
+          <li><a href="javascript:void(0)" data-placeholder="discord">Join Discord</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="suggestions">Suggestions</a></li>
+          <li><a href="javascript:void(0)" data-placeholder="report">Report an issue</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Konu Pub & Grill. Fan-made community site — not affiliated with or endorsed by Roblox Corporation.</div>
+      <div class="footer-socials">
+        <a href="javascript:void(0)" data-placeholder="discord" aria-label="Discord">Discord</a>
+        <a href="javascript:void(0)" data-placeholder="twitter" aria-label="X / Twitter">X</a>
+        <a href="javascript:void(0)" data-placeholder="roblox-group" aria-label="Roblox group">Roblox Group</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="staff-overlay" id="staffOverlay">
+  <button type="button" class="staff-close" id="staffClose" aria-label="Close">&times;</button>
+  <div class="staff-inner">
+
+    <div class="lock-card" id="lockCard">
+      <h1>Staff only</h1>
+      <p>Enter the staff password to edit the rank hierarchy.</p>
+      <form id="lockForm">
+        <input type="password" id="pwInput" placeholder="Password" autocomplete="current-password" required>
+        <button type="submit" class="btn btn-primary">Unlock</button>
+        <div class="error-msg" id="lockError"></div>
+      </form>
+    </div>
+
+    <div class="staff-editor" id="staffEditor">
+      <div class="staff-notice">
+        <strong>How this works:</strong> this is a static site, so edits here are saved as a draft in this
+        browser. When you're happy with the hierarchy, click <strong>Copy code</strong> below and paste it
+        over the <code>RANKS</code> array near the bottom of this file's source (look for the
+        <code>RANKS START</code> / <code>RANKS END</code> markers), then re-upload the file to your host.
+        The password keeps casual visitors out, but since it lives in this file's code, don't reuse a
+        password you use anywhere important.
+      </div>
+
+      <h2>Rank hierarchy</h2>
+      <p class="section-sub">Top of the list is the highest rank. Use the arrows to reorder.</p>
+      <div id="rankRows"></div>
+      <div style="margin-top:18px;">
+        <button type="button" class="btn btn-ghost" id="addRankBtn">+ Add rank</button>
+      </div>
+
+      <h2 class="section-title">Get the updated code</h2>
+      <p class="section-sub">Copy this and paste it over the RANKS array below (near the end of this file).</p>
+      <div class="output-box">
+        <textarea id="outputCode" readonly spellcheck="false"></textarea>
+        <div class="copy-row">
+          <button type="button" class="btn btn-primary" id="copyBtn">Copy code</button>
+          <span class="copy-msg" id="copyMsg"></span>
+        </div>
+      </div>
+
+      <details class="change-pw">
+        <summary>Change the staff password</summary>
+        <div class="pw-panel">
+          <label style="font-size:0.82rem; color:var(--parchment-dim);">New password</label>
+          <input type="text" id="newPw" placeholder="Type a new password">
+          <button type="button" class="btn btn-ghost" id="setPwBtn" style="align-self:flex-start;">Show code to save</button>
+          <div id="pwOut"></div>
+          <p style="font-size:0.8rem; color:var(--parchment-dim);">
+            Copy the line above and use it to replace the <code>STAFF_PASSWORD</code> constant near the
+            bottom of this file's source, then re-upload the file.
+          </p>
+        </div>
+      </details>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.style.display === 'flex';
+    links.style.display = open ? 'none' : 'flex';
+    links.style.cssText += open ? '' : 'position:absolute; top:72px; left:0; right:0; background:rgba(21,17,12,0.98); flex-direction:column; padding:20px 28px; border-bottom:1px solid rgba(244,233,215,0.14); align-items:flex-start; gap:18px;';
+  });
+
+  // Placeholder buttons (Play on Roblox, Join Discord, etc.) do nothing until
+  // you add real links — see the data-placeholder attribute on each <a>.
+  document.querySelectorAll('[data-placeholder]').forEach(el => {
+    el.addEventListener('click', () => {
+      console.log('Add a real URL for this button: data-placeholder="' + el.dataset.placeholder + '"');
+    });
+  });
+</script>
+
+<script>
+  // ===== RANKS START — edit ranks from settings.html, then paste the =====
+  // ===== updated array here, replacing everything between the markers ===
+  const RANKS = [
+    { name: "Owner",            color: "#cb9a4c", desc: "Owns and runs Konu Pub & Grill.",                     req: "\u2014" },
+    { name: "General Manager",  color: "#e7c384", desc: "Oversees every department, hiring, and house rules.", req: "Promoted by Owner" },
+    { name: "Assistant Manager",color: "#d9b06a", desc: "Runs day-to-day shifts and staff scheduling.",        req: "6+ shifts as Shift Lead" },
+    { name: "Shift Lead",       color: "#c7975a", desc: "Opens or closes a shift and oversees the floor.",     req: "10+ shifts as Bartender/Server" },
+    { name: "Head Bartender",   color: "#b5462e", desc: "Runs the bar and trains new bartenders.",             req: "15+ shifts as Bartender" },
+    { name: "Bartender",        color: "#d97a5f", desc: "Runs the taps and the bar tickets.",                  req: "10+ shifts as Server" },
+    { name: "Server",           color: "#8a9a7a", desc: "Takes orders, runs food, handles a section.",         req: "5+ shifts as Busser" },
+    { name: "Busser",           color: "#7a8a94", desc: "Clears tables and learns the floor.",                 req: "Passed training" },
+    { name: "Trainee",          color: "#b9a98c", desc: "New hire, currently in training.",                    req: "Applied and accepted" }
+  ];
+  // ===== RANKS END =====
+
+  function renderHierarchy(){
+    const list = document.getElementById('hierarchyList');
+    if(!list) return;
+    list.innerHTML = RANKS.map((r, i) => `
+      <div class="hierarchy-row">
+        <div class="hierarchy-tier">${String(i + 1).padStart(2, '0')}</div>
+        <div class="hierarchy-name"><span class="swatch" style="background:${r.color}"></span>${r.name}</div>
+        <div class="hierarchy-desc">${r.desc}</div>
+        <div class="hierarchy-req">${r.req}</div>
+      </div>
+    `).join('');
+  }
+  renderHierarchy();
+</script>
+
+<script>
+  // ===== STAFF LOGIN — plain comparison on purpose (see the notice inside =====
+  // ===== the staff panel for why this isn't meant to be real security)   =====
+  let STAFF_PASSWORD = "konu2026";
+
+  const staffOverlay = document.getElementById('staffOverlay');
+  const lockCard = document.getElementById('lockCard');
+  const staffEditor = document.getElementById('staffEditor');
+  const lockForm = document.getElementById('lockForm');
+  const lockError = document.getElementById('lockError');
+
+  function openStaffPanel(){
+    staffOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if(sessionStorage.getItem('konuStaffUnlocked') === '1'){
+      showStaffEditor();
+    }
+  }
+  function closeStaffPanel(){
+    staffOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function showStaffEditor(){
+    lockCard.style.display = 'none';
+    staffEditor.classList.add('active');
+    loadRanksIntoEditor();
+  }
+
+  document.querySelectorAll('.js-staff-login').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openStaffPanel(); });
+  });
+  document.getElementById('staffClose').addEventListener('click', closeStaffPanel);
+  staffOverlay.addEventListener('click', (e) => { if(e.target === staffOverlay) closeStaffPanel(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeStaffPanel(); });
+  if(window.location.hash === '#staff') openStaffPanel();
+
+  lockForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = document.getElementById('pwInput').value;
+    if(val === STAFF_PASSWORD){
+      sessionStorage.setItem('konuStaffUnlocked', '1');
+      lockError.textContent = '';
+      showStaffEditor();
+    } else {
+      lockError.textContent = 'Wrong password.';
+    }
+  });
+
+  // ---- rank editor (edits a working copy, exports code for you to paste) ----
+  let editRanks = [];
+
+  function loadRanksIntoEditor(){
+    const draft = localStorage.getItem('konuRanksDraft');
+    editRanks = draft ? JSON.parse(draft) : JSON.parse(JSON.stringify(RANKS));
+    renderRankRows();
+  }
+  function saveDraft(){
+    localStorage.setItem('konuRanksDraft', JSON.stringify(editRanks));
+    renderOutputCode();
+  }
+  function escapeAttr(str){
+    return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  }
+  function escapeJs(str){
+    return String(str).replace(/\\/g,'\\\\').replace(/"/g,'\\"');
+  }
+  function renderRankRows(){
+    const container = document.getElementById('rankRows');
+    container.innerHTML = editRanks.map((r, i) => `
+      <div class="rank-row" data-i="${i}">
+        <div class="rank-color">
+          <span class="rank-tier">${String(i + 1).padStart(2, '0')}</span>
+          <input type="color" value="${r.color}" data-field="color">
+        </div>
+        <div class="rank-field"><label>Name</label><input type="text" value="${escapeAttr(r.name)}" data-field="name"></div>
+        <div class="rank-field"><label>Description</label><input type="text" value="${escapeAttr(r.desc)}" data-field="desc"></div>
+        <div class="rank-field"><label>Requirement</label><input type="text" value="${escapeAttr(r.req)}" data-field="req"></div>
+        <div class="row-actions">
+          <button type="button" data-act="up">Up</button>
+          <button type="button" data-act="down">Down</button>
+          <button type="button" data-act="del" style="color:var(--ember);">Remove</button>
+        </div>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('input').forEach(inp => {
+      inp.addEventListener('input', (e) => {
+        const i = +e.target.closest('.rank-row').dataset.i;
+        editRanks[i][e.target.dataset.field] = e.target.value;
+        saveDraft();
+      });
+    });
+    container.querySelectorAll('[data-act]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const i = +e.target.closest('.rank-row').dataset.i;
+        const act = e.target.dataset.act;
+        if(act === 'up' && i > 0){ [editRanks[i-1], editRanks[i]] = [editRanks[i], editRanks[i-1]]; }
+        if(act === 'down' && i < editRanks.length - 1){ [editRanks[i+1], editRanks[i]] = [editRanks[i], editRanks[i+1]]; }
+        if(act === 'del'){ editRanks.splice(i, 1); }
+        saveDraft();
+        renderRankRows();
+      });
+    });
+    renderOutputCode();
+  }
+  document.getElementById('addRankBtn').addEventListener('click', () => {
+    editRanks.push({ name: "New Rank", color: "#b9a98c", desc: "Describe this rank.", req: "\u2014" });
+    saveDraft();
+    renderRankRows();
+  });
+  function renderOutputCode(){
+    const lines = editRanks.map(r =>
+      `    { name: "${escapeJs(r.name)}", color: "${r.color}", desc: "${escapeJs(r.desc)}", req: "${escapeJs(r.req)}" }`
+    ).join(',\n');
+    document.getElementById('outputCode').value = `  const RANKS = [\n${lines}\n  ];`;
+  }
+  document.getElementById('copyBtn').addEventListener('click', () => {
+    const box = document.getElementById('outputCode');
+    box.select();
+    const done = () => {
+      const msg = document.getElementById('copyMsg');
+      msg.textContent = 'Copied!';
+      setTimeout(() => msg.textContent = '', 2000);
+    };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(box.value).then(done).catch(() => document.execCommand('copy') && done());
+    } else {
+      document.execCommand('copy');
+      done();
+    }
+  });
+  document.getElementById('setPwBtn').addEventListener('click', () => {
+    const val = document.getElementById('newPw').value;
+    if(!val) return;
+    document.getElementById('pwOut').innerHTML =
+      `<div class="pw-out">let STAFF_PASSWORD = "${escapeJs(val)}";</div>`;
+  });
+</script>
+
+</body>
+</html>
